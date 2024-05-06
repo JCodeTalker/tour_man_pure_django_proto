@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% include 'main/includes/messages.html' %}
+
+
+{% block content %}
+<div class="main container py-5">
+
+	<!-- Create a Form -->
+	<form method="POST" class="container py-5">
+		<!-- Security token by Django -->
+		{% csrf_token %}
+
+		<!-- form as paragraph -->
+		{{ form|crispy }}
+
+		<input type="submit" value="Update"  class="btn btn-primary" >
+	</form>
+
+</div>
+{% endblock %}

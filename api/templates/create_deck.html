@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% include 'main/includes/messages.html' %}
+
+{% block content %}
+<div class="container py-5">
+	<h1>Deck Register</h1>
+	<p>
+	Fill the 'Desc' field with your card names, coma separated
+	</p>
+<form method="POST" enctype="multipart/form-data">
+
+	<!-- Security token -->
+	{% csrf_token %}
+
+	<!-- Using the formset -->
+	{{ register_form|crispy }} 
+	<button class="btn btn-primary" type="submit">Register</button>
+
+</form>
+</div>
+{% endblock %}

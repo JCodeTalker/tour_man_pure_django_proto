@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% include 'main/includes/messages.html' %}
+
+{% block content %}
+<div class="main">
+	
+	<!-- Specify fields to be displayed -->
+	<div class="card text-center">
+		<div class="card-header">
+		  Deck Details
+		</div>
+		<div class="card-body">
+			<h5 class="card-title">{{ data.name }}</h5>
+			<p class="card-text">{{ data.desc }}</p>
+			<a href="{% url 'list' %}" class="btn btn-primary">Go back</a>
+		</div>
+		<div class="card-footer text-muted">
+			Deck Details
+		</div>
+	  </div>
+</div>
+{% endblock %}

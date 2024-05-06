@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% include 'main/includes/messages.html' %}
+
+{% block content %}
+
+<div class="container-fluid d-flex justify-content-center">
+	
+	<!-- Specify fields to be displayed -->
+	<div class="container d-flex flex-column mb-3">
+		<h1 class="display-1">{{ data.username }}</h1>
+		<h6 class="display-6">{{ data.email }}</h6>
+		<a href="{% url 'update_profile' %}" class="text-decoration-none text-light"><button type="button" class="btn btn-primary mb-2" style="width: 100%;">Update Info</button></a>
+		<a href="{% url 'delete_user_view' %}" class="text-decoration-none text-light"><button  type="button" class="btn btn-danger" style="width: 100%;">Delete account</button></a>
+	</div>
+</div>
+{% endblock %}
