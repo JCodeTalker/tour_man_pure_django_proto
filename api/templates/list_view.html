@@ -12,8 +12,8 @@
     {% for data in dataset %}
     {% if data.owner.username == user.username %}
     <div class="col">
-      <div class="card shadow bg-body rounded" style="width: 18rem;">
-      <img class="card-img-top" src="https://repositorio.sbrauble.com/images/cartas/noyugcard.jpg" alt="Card image cap">
+      <div class="card shadow bg-body rounded m-2" style="width: 18rem;">
+      <img class="card-img-top" src={{ data.image.url }} alt="Card image cap" width="286px" height="240px" >
       <div class="card-body">
         <h5 class="card-title">{{ data.name }}</h5>
         <p class="card-text">{{ data.desc }}</p>

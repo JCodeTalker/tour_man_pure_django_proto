@@ -1,15 +1,23 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import DecksModel
-from .forms import DecksForm, NewUserForm, UpdateUserForm
+from .forms import DecksForm, NewUserForm, UpdateUserForm, ImageForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-import requests 
 
+def image_upload(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/list')
+    else:
+        form = ImageForm()
+    return render(request, 'image_upload.html', {'form': form})
 
 def register_request(request):
 	if request.method == "POST":
@@ -79,15 +87,18 @@ def logout_request(request):
 	messages.info(request, "You have successfully logged out.") 
 	return redirect("/list")
 
-
 def create_deck(request):
 	context ={}
-	form = DecksForm(request.POST or None)
-	if form.is_valid():
-		deck = form.save(commit=False)
-		deck.owner = request.user
-		deck.save()
-		return redirect("/list")
+	if request.method == 'POST':
+		form = DecksForm(request.POST, request.FILES or None)
+		if form.is_valid():
+			deck = form.save(commit=False)
+			deck.owner = request.user
+			deck.save()
+			return redirect("/list")
+	else:
+		form = DecksForm(None)
+			
 	context['form']= form
 	return render(request, "create_deck.html", context={"register_form":form})
 
